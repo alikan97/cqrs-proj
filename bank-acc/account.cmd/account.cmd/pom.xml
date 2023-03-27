@@ -30,17 +30,6 @@
 			<artifactId>spring-kafka</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>com.bank</groupId>
-			<artifactId>cqrs.core</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
-		</dependency>
-		<dependency>
-			<groupId>com.bank</groupId>
-			<artifactId>account.cmd</artifactId>
-			<version>1.0.0</version>
-		</dependency>
-
-		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
 			<optional>true</optional>
@@ -58,7 +47,19 @@
 		<dependency>
 			<groupId>com.bank</groupId>
 			<artifactId>account.common</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
+			<version>1.0.0</version>
+			<scope>compile</scope>
+		</dependency>
+        <dependency>
+            <groupId>com.bank</groupId>
+            <artifactId>cqrs.core</artifactId>
+            <version>1.0.0</version>
+            <scope>compile</scope>
+        </dependency>
+		<dependency>
+			<groupId>com.bank</groupId>
+			<artifactId>account.common</artifactId>
+			<version>1.0.0</version>
 			<scope>compile</scope>
 		</dependency>
 	</dependencies>
