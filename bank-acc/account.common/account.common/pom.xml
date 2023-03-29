@@ -14,7 +14,7 @@
 	<name>account.common</name>
 	<description>Bank account Common Proj</description>
 	<properties>
-		<java.version>17</java.version>
+		<java.version>16</java.version>
 	</properties>
 	<dependencies>
 		<dependency>

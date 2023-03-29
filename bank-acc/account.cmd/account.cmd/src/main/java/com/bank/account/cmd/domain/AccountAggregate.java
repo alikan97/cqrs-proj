@@ -15,8 +15,13 @@ public class AccountAggregate extends AggregateRoot {
     public Boolean active;
     public double balance;
 
+    public double getBalance() {
+        return balance;
+    }
+
     public AccountAggregate (OpenAccount command) {
         raiseEvent(AccountOpened.builder()
+                .id(command.getId())
                 .accountType(command.getAccountType())
                 .accountHolder(command.getAccountHolder())
                 .openingBalance(command.getOpeningBalance())
@@ -38,18 +43,18 @@ public class AccountAggregate extends AggregateRoot {
             throw new IllegalArgumentException("Deposit must be > 0");
         }
 
-        raiseEvent(FundsDeposited.builder().amount(amount).build());
+        raiseEvent(FundsDeposited.builder().id(this.id).amount(amount).build());
     }
 
-    public void apply (FundsDeposited events) {
-        this.id = events.getId();
-        this.balance += events.getAmount();
+    public void apply (FundsDeposited event) {
+        this.id = event.getId();
+        this.balance += event.getAmount();
     }
 
     public void withdrawFunds (double amount) {
         if (!this.active) throw new IllegalStateException("Cannot withdraw from closed acc");
 
-        raiseEvent(FundWithdrawn.builder().amount(amount).build());
+        raiseEvent(FundWithdrawn.builder().id(this.id).amount(amount).build());
     }
 
     public void apply (FundWithdrawn event) {
@@ -60,7 +65,7 @@ public class AccountAggregate extends AggregateRoot {
     public void closeAccount () {
         if (!this.active) throw new IllegalStateException("Account already closed");
 
-        raiseEvent(AccountClosed.builder().build());
+        raiseEvent(AccountClosed.builder().id(this.id).build());
     }
 
     public void apply (AccountClosed event) {
