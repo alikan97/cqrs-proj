@@ -40,4 +40,9 @@ public class AccountCommandHandler implements CommandHandler{
         aggregate.depositFunds(command.getAmount());
         eventSourcingHandler.save(aggregate);
     }
+
+    @Override
+    public void handle(RestoreReadDb command) {
+        eventSourcingHandler.republishEvents();
+    }
 }
