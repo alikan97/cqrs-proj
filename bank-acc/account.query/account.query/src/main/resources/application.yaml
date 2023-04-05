@@ -3,14 +3,14 @@ server:
 
 spring:
   jpa:
-    database-platform: org.hibernate.dialect.MySQL8Dialect
+    database-platform: org.hibernate.dialect.PostgreSQL94Dialect
     show-sql: true
     hibernate:
       ddl-auto: update
   datasource:
-    url: jdbc:mysql://localhost:3306/bankAccount?createDatabaseIfNotExist=true
-    username: root
-    password: Abcd1234
+    url: jdbc:postgresql://localhost:5432/bankAccount
+    username: postgres
+    password: abcd1234
   kafka:
     listener:
       ack-mode: MANUAL_IMMEDIATE
@@ -19,7 +19,7 @@ spring:
       group-id: bankAccConsumer
       auto-offset-reset: earliest
       key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
-      value-deserializer: org.springframework.support.serializer.JsonDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
       properties:
         spring:
           json:
